@@ -5,7 +5,7 @@ Work from RCS for web scraping, PDF conversion to text, keyword counting, and ot
 
 ## Usage
 
-<pre>astern9_word_counts.pl input_directory output_directory
+<pre>perl astern9_word_counts.pl input_directory output_directory
 
  Read in TEXT documents at input_directory and perform word counts on each file. Tab-
  separated output file (rows are files, columns are keywords) is placed in output_directory.
@@ -13,7 +13,7 @@ Work from RCS for web scraping, PDF conversion to text, keyword counting, and ot
  
 </pre>
 
-<pre>astern_10_parse_device_recall_pages.pl
+<pre>perl astern_10_parse_device_recall_pages.pl
 
  (to be completed)
  
