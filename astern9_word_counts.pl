@@ -4,18 +4,40 @@ use File::Basename;
 # this is astern9_word_counts.pl - has same keywords and rules used in astern7 and astrern8
 # it was developed from astern7/bin/WORKING_astern7-2001-files.pl
 #
-my $root           = "/export/home/dor/jsheridan/astern9/";
+# my $root           = "/export/home/dor/jsheridan/astern9/";
 #
 # =========================================================
-my $inputRoot      = $root."input2/";  # NB for txt files from the OCRed pdf files
-my $outputRoot     = $root."output2/"; # NB for txt files from the OCRed pdf files
+# my $inputRoot      = $root."input2/";  # NB for txt files from the OCRed pdf files
+# my $outputRoot     = $root."output2/"; # NB for txt files from the OCRed pdf files
 #my $inputRoot      = $root."input/";
 #my $outputRoot     = $root."output/";
 #my $inputRoot      = $root."OCR_input/";
 #my $outputRoot     = $root."OCR_output/";
 # =========================================================
+
+# changes by RMF to allow flexibility with input/output directories as arguments
+use File::Spec;
+use Cwd 'abs_path';
+
+my $usage           = qq/$0 input_directory output_directory
+
+ Read in TEXT documents at input_directory and perform word counts on each file. Tab-
+ separated output file (rows are files, columns are keywords) is placed in output_directory.
+ 
+/;
+
+# get input parameters
+my $inputRoot       = shift || die "Error: 1st parameter must be input_directory!\n\n$usage";
+my $outputRoot      = shift || die "Error: 2nd parameter must be output_directory!\n\n$usage";
+
+# transform them to full paths
+$inputRoot          = abs_path($inputRoot);
+$outputRoot         = abs_path($outputRoot);
+
+# now continue...
 my $outputFileName  = "astern9_OCR_output_$$.dat";
-my $outputFile      = $outputRoot.$outputFileName;
+my $outputFile      = File::Spec->catfile($outputRoot, $outputFileName);
+
 #
 open (OUTPUT,   ">$outputFile")   || (die "can't open $outputFile: $!");
 # =========================================================
